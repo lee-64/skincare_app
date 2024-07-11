@@ -1,0 +1,254 @@
+/*organize classes with better names that clearer describe if a class is a child, parent, etc*/
+
+
+.fixed-header {
+    /*position: fixed;*/
+}
+
+header.header-container {
+    font-family: 'Roboto', sans-serif;
+    display: flex;
+    justify-content: space-evenly;
+}
+header.header-container a {
+
+}
+hr.across-full-screen {
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #999
+}
+
+.routine-home-page-container {
+    font-family: 'Roboto', sans-serif;
+    font-size: large;
+    display: flex;
+    flex-direction: column;
+    margin: auto 20%; /* center page content */
+}
+hr#under-your-routine {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #ccc;
+    margin: -0.75rem 0 1rem 0;
+    padding: 0;
+}
+.button-container {
+    display: flex;
+    justify-content: flex-end;
+}
+.button-container .edit-routine-button,
+.button-container .submit-routine-button {
+    padding: 5px 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 0.625rem;
+}
+.button-container .edit-routine-button:hover,
+.button-container .submit-routine-button:hover {
+    background-color: #0056b3;
+}
+
+
+.no-routine-yet-msg {
+    font-family: 'Roboto', sans-serif;
+    font-size: large;
+    color: #B9B9B9;
+    text-align: center;
+    margin-top: 3rem;
+}
+.create-acc-or-sign-in-msg {
+    font-family: 'Roboto', sans-serif;
+    font-size: small;
+    color: #C9C9C9;
+    text-align: center;
+    margin-top: 1rem;
+}
+
+.routine-home-section-block {
+    margin-bottom: 15px;
+    padding: 10px;
+    border: 1px solid #d4d4d4;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.routine-home-section-title {
+    font-weight: bold;
+    margin-bottom: -0.2rem;
+}
+.section-title-hr  { /* horizontal line */
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #ccc;
+    margin-right: 33%;
+    padding: 0;
+}
+.routine-home-section-title-text-box {
+    font-size: large;
+    font-weight: bold;
+    border: 1px solid #d4d4d4;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+li.product-in-section-element {
+    list-style-type: none;
+}
+.product-search-text-box {
+    width: 95%;
+    font-size: large;
+    height: 1.5rem;
+    margin-bottom: 0.3rem;
+    border: 1px solid #d4d4d4;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.autocomplete-product-search-list {}
+.routine-home-product {}
+
+.top-right-close-button {
+    margin-right: -60%;
+}
+
+.sign-in-body {
+    font-family: 'Roboto', sans-serif;
+    height: 100%;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+}
+.sign-in-container {
+    display: flex;
+    flex-direction: column;
+    /*justify-content: space-between;*/
+    width: 350px;
+    padding: 25px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin: 4rem auto; /* center page content */
+}
+.sign-in-title {}
+#username-field, #password-field {
+    font-size: large;
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    box-sizing: border-box; /* Ensure padding and border are included in the element's total width */
+}
+#sign-in-button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*body {*/
+/*    font-family: 'Roboto', sans-serif;*/
+/*    margin: 0;*/
+/*    text-align: center;*/
+/*}*/
+/*.container {*/
+/*    display: flex;*/
+/*    flex-direction: column;*/
+/*    justify-content: center;*/
+/*    text-align: left;*/
+/*    width: 100%;*/
+/*    max-width: 1000px;*/
+/*    margin: 0 auto;*/
+/*    box-sizing: border-box;*/
+/*}*/
+/*!*.edit-routine-sections-container {*!*/
+/*!*    width: 100%;*!*/
+/*!*}*!*/
+
+/*.edit-button {*/
+/*    margin: 0 auto;*/
+/*    padding: 5px 10px;*/
+/*    background-color: #007bff;*/
+/*    color: white;*/
+/*    border: none;*/
+/*    border-radius: 5px;*/
+/*    cursor: pointer;*/
+/*}*/
+/*.edit-button:hover {*/
+/*    background-color: #0056b3;*/
+/*}*/
+
+/*.section {*/
+/*    margin-bottom: 20px;*/
+/*    padding: 10px;*/
+/*    border: 1px solid #d4d4d4;*/
+/*    border-radius: 5px;*/
+/*}*/
+/*.section-title {*/
+/*    font-weight: bold;*/
+/*    margin-bottom: 10px;*/
+/*    cursor: move;*/
+/*}*/
+/*.text-box {*/
+/*    margin-bottom: 10px;*/
+/*    display: block;*/
+/*    width: 100%;*/
+/*    padding: 8px;*/
+/*    font-size: 16px;*/
+/*    box-sizing: border-box;*/
+/*}*/
+/*.product-search {*/
+/*    position: relative;*/
+/*    margin-bottom: 10px;*/
+/*    display: flex;*/
+/*    align-items: center;*/
+/*}*/
+/*.product-search .drag-handle {*/
+/*    cursor: move;*/
+/*    margin-right: 10px;*/
+/*}*/
+/*.autocomplete-list {*/
+/*    position: absolute;*/
+/*    top: 100%; !* Position it directly below the input *!*/
+/*    left: 0;*/
+/*    width: 100%;*/
+/*    border: 1px solid #d4d4d4;*/
+/*    border-top: none;*/
+/*    z-index: 99;*/
+/*    background-color: white;*/
+/*}*/
+/*.autocomplete-list div {*/
+/*    padding: 10px;*/
+/*    cursor: pointer;*/
+/*}*/
+/*.autocomplete-list div:hover {*/
+/*    background-color: #e9e9e9;*/
+/*}*/
+/*.product-container {*/
+/*    margin-top: 10px;*/
+/*    list-style-type: none;*/
+/*    padding-left: 0;*/
+/*}*/
