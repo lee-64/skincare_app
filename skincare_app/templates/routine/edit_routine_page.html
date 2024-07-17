@@ -1,0 +1,208 @@
+{% extends "base_header.html" %}
+
+{% block header %}
+    <h1>{% block title %}Edit Routine{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+<div class="routine-home-page-container">
+    <h1>Your Routine</h1>
+        <hr id="under-your-routine"/>
+    <div class="button-container">
+        <button class="submit-routine-button">Save</button>
+    </div>
+    <div class="edit-routine-sections-container" id="sections-container"></div>
+    <button class="add-button" id="add-step-button">Add a step to your skincare routine</button>
+</div>
+{% endblock %}
+
+{% block scripts %}
+    <script>
+        $(document).ready(function() {
+            let sectionCount = 0;  // incremented when routine is initialized and later when new sections are added
+            // console.log("section count:", sectionCount)
+
+
+            // function to initialize an existing section in the routine
+            function initializeExistingSection(sectionTitle = '', products = []) {
+                const sectionId = `section-${sectionCount}`;
+                const textBoxId = `text-box-${sectionCount}`;
+                // console.log("in initializeExistingSection, id", sectionId, "; sectionTitle:", sectionTitle, ", and products:", products);
+
+                const sectionHtml = `
+                    <div class="routine-home-section-block" id="${sectionId}">
+                        <input type="text" id="${textBoxId}" class="routine-home-section-title-text-box" placeholder="Before bed, After the gym, etc." data-section-title="${sectionTitle}" value="${sectionTitle}">
+                        <button class="top-right-close-button" data-section-id="${sectionId}">X</button>
+                            <hr class="section-title-hr"/>
+                        <button class="add-button add-product-button" data-section-id="${sectionId}">Add a product</button>
+                        <ul class="product-container" id="product-container-${sectionId}"></ul>
+                    </div>
+                `;
+                $('#sections-container').sortable({
+                    opacity: 1
+                });
+
+                $('#sections-container').append(sectionHtml);
+                $('#sections-container').sortable('refresh');
+
+                // initialize existing products to the section
+                products.forEach(product => initializeProduct(sectionId, product));
+
+                // allows user to edit existing routine section names
+                $(`#${textBoxId}`).on('input', function() {
+                    const sectionTitle = $(this).val();
+                    $(this).attr('data-section-title', sectionTitle);
+                    // console.log("section title changed to:", sectionTitle);
+                });
+
+                sectionCount++;
+            }
+
+
+            // function to initialize an existing product in a section in the routine AND/OR create a new (empty/unnamed "") product in an existing or new section
+            function initializeProduct(sectionId, productName = "") {
+                const productIndex = $(`#${sectionId} .product-in-section-element`).length;
+                const searchInputId = `search-input-${sectionId}-${productIndex}`;
+                const autocompleteListId = `autocomplete-product-search-list-${sectionId}-${productIndex}`;
+                // console.log("in initializeProduct(): product index in section", sectionId, ":", productIndex);
+
+                const productHtml = `
+                    <li class="product-in-section-element">
+                        <span class="drag-handle">&#x2630;</span>
+                        <input type="text" id="${searchInputId}" class="product-search-text-box" placeholder="Add a product" value="${productName}">
+                        <div id="${autocompleteListId}" class="autocomplete-product-search-list"></div>
+                    </li>
+                `;
+                $(`#product-container-${sectionId}`).sortable({ handle: '.drag-handle' });
+
+                $(`#product-container-${sectionId}`).append(productHtml);
+                $(`#product-container-${sectionId}`).sortable('refresh');
+
+                // search functionality for relevant products based off of the user's query
+                $(`#${searchInputId}`).on('input', function() {
+                    const query = $(this).val();
+                    if (query.length > 0) {
+                        $.ajax({
+                            url: '/search',
+                            data: { query: query },
+                            success: function(data) {
+                                const autocompleteList = $(`#${autocompleteListId}`);
+                                autocompleteList.empty();
+                                data.forEach(function(item) {
+                                    autocompleteList.append(`<div>${item}</div>`);
+                                });
+                            }
+                        });
+                    } else {
+                        $(`#${autocompleteListId}`).empty();
+                    }
+                });
+
+                $(document).on('click', `#${autocompleteListId} div`, function() {
+                    const selectedItem = $(this).text();
+                    $(`#${searchInputId}`).val(selectedItem);
+                    $(`#${autocompleteListId}`).empty();
+                });
+                $(document).click(function(e) {
+                    if (!$(e.target).closest(`#${searchInputId}`).length) {
+                        $(`#${autocompleteListId}`).empty();
+                    }
+                });
+            }
+
+
+            // function to create a new section after the press of the add step button
+            function createNewSection() {
+                const sectionId = `section-${sectionCount}`;
+                const textBoxId = `text-box-${sectionCount}`;
+                let sectionTitle = '';
+                // console.log("in createNewSection, id", sectionId);  // section title and products are unknown at this point
+
+                const sectionHtml = `
+                    <div class="routine-home-section-block" id="${sectionId}">
+                        <input type="text" id="${textBoxId}" class="routine-home-section-title-text-box" placeholder="Before bed, After the gym, etc." data-section-title="${sectionTitle}" value="${sectionTitle}">
+                        <button class="top-right-close-button" data-section-id="${sectionId}">X</button>
+                            <hr class="section-title-hr"/>
+                        <button class="add-button add-product-button" data-section-id="${sectionId}">Add a product</button>
+                        <ul class="product-container" id="product-container-${sectionId}"></ul>
+                    </div>
+                `;
+                $('#sections-container').sortable({
+                    opacity: 1
+                });
+
+                $('#sections-container').append(sectionHtml);
+                $('#sections-container').sortable('refresh');
+
+                // functionality to add products to the section is not done within the function for New Sections
+
+                // allows user to edit existing routine section names
+                $(`#${textBoxId}`).on('input', function() {
+                    const sectionTitle = $(this).val();
+                    $(this).attr('data-section-title', sectionTitle);
+                    // console.log("section title changed to:", sectionTitle);
+                });
+
+                sectionCount++;
+            }
+
+
+            // embed existing routine data
+            const existingRoutine = {{ session.routine | tojson | safe }};
+            // console.log("existing routine:", existingRoutine)
+            if (existingRoutine) {
+                existingRoutine.forEach(function(section) {
+                    initializeExistingSection(section[0], section[1]);
+                });
+            }
+
+            // create a new step
+            $('#add-step-button').click(function() {
+                createNewSection();
+            });
+
+            // add a new product (in existing or new section)
+            $(document).on('click', '.add-product-button', function() {
+                const sectionId = $(this).data('section-id');
+                initializeProduct(sectionId);
+            });
+
+            // delete a section
+            $(document).on('click', '.top-right-close-button', function() {
+                const sectionId = $(this).data('section-id');
+                $(`#${sectionId}`).remove();
+            });
+
+
+            // save routine
+            $('.submit-routine-button').click(function() {
+                let routine = [];
+                $('#sections-container .routine-home-section-block').each(function() {
+                    let sectionTitle = $(this).find('input.routine-home-section-title-text-box').attr('data-section-title');
+                    let products = [];
+                    $(this).find('.product-in-section-element input').each(function() {
+                        products.push($(this).val());
+                    });
+                    routine.push({ section: sectionTitle, products: products });
+                });
+// ADD "PRODUCT NOT RECOGNIZED" functionality that prevents the user from submitting their routine if the product doesn't exist
+                $.ajax({
+                    type: 'POST',
+                    url: '/submit_routine',
+                    contentType: 'application/json',
+                    data: JSON.stringify({ routine: routine }),
+                    success: function(response) {``
+                        if (response.status === 'success') {
+                            window.location.href = response.redirect_url;
+                        } else {
+                            console.error("Failed to submit routine:", response);
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        console.log("AJAX error:", status, error);
+                    }
+                });
+            });
+        });
+    </script>
+{% endblock %}

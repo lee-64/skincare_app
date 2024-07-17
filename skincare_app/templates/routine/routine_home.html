@@ -1,0 +1,50 @@
+{% extends "base_header.html" %}
+
+{% block header %}
+    <h1>{% block title %}Routine{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+<body class="routine-home-page">
+    <div class="routine-home-page-container">
+        <h1>Your Routine</h1>
+        <hr id="under-your-routine"/>
+        {% if not session.user_id %}
+            <div class="button-container">
+                <form action="{{ url_for('routine.edit_routine') }}" method="POST">
+                    <button type="submit" class="edit-routine-button">Edit</button>
+                </form>
+            </div>
+            <p class="no-routine-yet-msg">No routine yet! Press "Edit" to create one.</p>
+            <p class="create-acc-or-sign-in-msg">Create an account or sign in to save your routine.</p>
+
+        {% elif session.routine is none or session.routine == 'NULL' or session.routine == [] %}
+            <div class="button-container">
+                <form action="{{ url_for('routine.edit_routine') }}" method="POST">
+                    <button type="submit" class="edit-routine-button">Edit</button>
+                </form>
+            </div>
+            <p class="no-routine-yet-msg">No routine yet! Press "Edit" to create one.</p>
+
+        {% else %}
+            <div class="button-container">
+                <form action="{{ url_for('routine.edit_routine') }}" method="POST">
+                    <button type="submit" class="edit-routine-button">Edit</button>
+                </form>
+            </div>
+        {{ session.routine }}
+            {% for section in session.routine %}
+                <div class="routine-home-section-block">
+                    <div class="routine-home-section-title">{{ section[0] }}</div>
+                    <hr class="section-title-hr"/>
+                    <ul>
+                        {% for product in section[1] %}
+                            <li class="routine-home-product">{{ product }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+</body>
+{% endblock %}

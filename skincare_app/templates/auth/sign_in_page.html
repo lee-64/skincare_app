@@ -1,0 +1,44 @@
+{% extends "base_header.html" %}
+
+{% block header %}
+    <h1>{% block title %}Sign In{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+<body class="sign-in-body">
+    <div class="sign-in-container">  <!--Later replace (or maybe supplement) username with email and add "forgot password" functionality-->
+        <h1 class="sign-in-title">Sign In</h1>
+        <form id="loginForm" method="POST">
+            <input type="text" name="username" id="username-field" placeholder="Username" required>
+            <input type="password" name="password" id="password-field" placeholder="Password" required>
+            <div class="error-message"></div>
+            <input type="submit" id="sign-in-button" value="Sign in">
+        </form>
+        <script>
+            $(document).ready(function(){
+                $("#loginForm").submit(function(event){
+                    event.preventDefault();  // prevent the form from submitting the default way
+                    var formData = {
+                        'username': $("#username-field").val(),
+                        'password': $("#password-field").val()
+                    };
+
+                    $.ajax({
+                        type: "POST",
+                        url: "/login_function",
+                        data: formData,
+                        dataType: "json",
+                        encode: true,
+                    }).done(function(data){
+                        if (data.success) {
+                            window.location.href = "/"; // Redirect to home page on success
+                        } else {
+                            $(".error-message").text(data.message); // Display error message
+                        }
+                    });
+                });
+            });
+        </script>
+    </div>
+</body>
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends "base_header.html" %}
+
+{% block header %}
+    <h1>{% block title %}Create account{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+<body>
+    <form method="POST">
+        <input type="text" name="username" id="username" placeholder="Username" required>
+        <input type="password" name="password" id="password" placeholder="Password" required>
+        <input type="submit" value="Create account">
+    </form>
+</body>
+{% endblock %}

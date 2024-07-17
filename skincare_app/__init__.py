@@ -1,14 +1,15 @@
+import pandas as pd
 import os
-from flask import Flask
+from flask import Flask, session, g
 
 
 # application factory function
 def create_app(test_config=None):
-    # create and configure the app
+    # create and configure the skincare_app
     app = Flask(__name__, instance_relative_config=True)
     app.config.from_mapping(
         SECRET_KEY='dev',
-        DATABASE=os.path.join(app.instance_path, 'app.db'),
+        DATABASE=os.path.join(app.instance_path, 'skincare_app.db'),
     )
 
     if test_config is None:
@@ -24,7 +25,23 @@ def create_app(test_config=None):
     except OSError:
         pass
 
+    with app.app_context():
+        # load the product dataset and store it in the app's context
+        product_df = pd.read_pickle('skincare_app/static/data/product_data.pkl')
+        app.config['PRODUCT_DF'] = product_df
+
     from . import db
     db.init_app(app)
+
+    from . import auth
+    app.register_blueprint(auth.bp)
+
+    from . import routine
+    app.register_blueprint(routine.bp)
+
+
+    # @app.context_processor
+    # def inject_user():
+    #     return dict(user_session=session)
 
     return app
