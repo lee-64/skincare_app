@@ -43,7 +43,7 @@ def set_routine(username, routine_list):
 def init_users_db():
     users_db = get_users_db()
 
-    # open_resource opens a file relative to the flaskr package, which is useful since you won’t necessarily know where
+    # open_resource opens a file relative to the skincare_app package, which is useful since you won’t necessarily know where
     # that location is when deploying the application later
     with current_app.open_resource('schema.sql') as f:
         users_db.executescript(f.read().decode('utf8'))
@@ -58,7 +58,7 @@ def init_users_db_command():
     init_users_db()
     click.echo('Initialized the database.')
     # once init-db has been registered with the skincare_app, it can be called using the flask command, similar to the run
-    # command: $ flask --app skincare_app run --debug    goes to   flask --app skincare_app init-db
+    # command: $ flask --app skincare_app run --debug    goes to   flask --app skincare_app init-users_db
 
 
 def init_app(app):

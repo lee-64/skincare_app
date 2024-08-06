@@ -119,7 +119,7 @@ def sign_in():
 
 @bp.route('/sign_out', methods=['GET', 'POST'])
 def sign_out():
-    if request.method == "POST":
+    if request.method == 'POST':
         session.clear()
     return redirect(url_for('routine.routine_home'))
 
