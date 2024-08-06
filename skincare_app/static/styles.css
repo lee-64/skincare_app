@@ -1,8 +1,13 @@
 /*organize classes with better names that clearer describe if a class is a child, parent, etc*/
 
 
+html {
+    background-color: #e8f3fd;
+
+}
+
 .fixed-header {
-    /*position: fixed;*/
+    background-color: white;
 }
 
 header.header-container {
@@ -152,103 +157,13 @@ li.product-in-section-element {
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*body {*/
-/*    font-family: 'Roboto', sans-serif;*/
-/*    margin: 0;*/
-/*    text-align: center;*/
-/*}*/
-/*.container {*/
-/*    display: flex;*/
-/*    flex-direction: column;*/
-/*    justify-content: center;*/
-/*    text-align: left;*/
-/*    width: 100%;*/
-/*    max-width: 1000px;*/
-/*    margin: 0 auto;*/
-/*    box-sizing: border-box;*/
-/*}*/
-/*!*.edit-routine-sections-container {*!*/
-/*!*    width: 100%;*!*/
-/*!*}*!*/
-
-/*.edit-button {*/
-/*    margin: 0 auto;*/
-/*    padding: 5px 10px;*/
-/*    background-color: #007bff;*/
-/*    color: white;*/
-/*    border: none;*/
-/*    border-radius: 5px;*/
-/*    cursor: pointer;*/
-/*}*/
-/*.edit-button:hover {*/
-/*    background-color: #0056b3;*/
-/*}*/
-
-/*.section {*/
-/*    margin-bottom: 20px;*/
-/*    padding: 10px;*/
-/*    border: 1px solid #d4d4d4;*/
-/*    border-radius: 5px;*/
-/*}*/
-/*.section-title {*/
-/*    font-weight: bold;*/
-/*    margin-bottom: 10px;*/
-/*    cursor: move;*/
-/*}*/
-/*.text-box {*/
-/*    margin-bottom: 10px;*/
-/*    display: block;*/
-/*    width: 100%;*/
-/*    padding: 8px;*/
-/*    font-size: 16px;*/
-/*    box-sizing: border-box;*/
-/*}*/
-/*.product-search {*/
-/*    position: relative;*/
-/*    margin-bottom: 10px;*/
-/*    display: flex;*/
-/*    align-items: center;*/
-/*}*/
-/*.product-search .drag-handle {*/
-/*    cursor: move;*/
-/*    margin-right: 10px;*/
-/*}*/
-/*.autocomplete-list {*/
-/*    position: absolute;*/
-/*    top: 100%; !* Position it directly below the input *!*/
-/*    left: 0;*/
-/*    width: 100%;*/
-/*    border: 1px solid #d4d4d4;*/
-/*    border-top: none;*/
-/*    z-index: 99;*/
-/*    background-color: white;*/
-/*}*/
-/*.autocomplete-list div {*/
-/*    padding: 10px;*/
-/*    cursor: pointer;*/
-/*}*/
-/*.autocomplete-list div:hover {*/
-/*    background-color: #e9e9e9;*/
-/*}*/
-/*.product-container {*/
-/*    margin-top: 10px;*/
-/*    list-style-type: none;*/
-/*    padding-left: 0;*/
-/*}*/
+/*modifies the iframe element of the cytoscape graph (e.g. box size)
+cyto.Cytoscape(style=...) modifies the graph itself (e.g. graph size within that box)*/
+#insights-cytoscape {
+    width: 100%;
+    height: 800px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: white;
+}

@@ -1,6 +1,6 @@
 import pandas as pd
 import os
-from flask import Flask, session, g
+from flask import Flask
 
 
 # application factory function
@@ -30,6 +30,9 @@ def create_app(test_config=None):
         product_df = pd.read_pickle('skincare_app/static/data/product_data.pkl')
         app.config['PRODUCT_DF'] = product_df
 
+        from .insights import init_dashboard
+        init_dashboard(app)
+
     from . import db
     db.init_app(app)
 
@@ -40,8 +43,6 @@ def create_app(test_config=None):
     app.register_blueprint(routine.bp)
 
 
-    # @app.context_processor
-    # def inject_user():
-    #     return dict(user_session=session)
+
 
     return app

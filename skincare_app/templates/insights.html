@@ -1,0 +1,12 @@
+{% extends "base_header.html" %}
+
+<h1>{% block title %}Insights{% endblock %}</h1>
+
+{% block content %}
+<body>
+    <h1>Your Insights</h1>
+    <div>
+        <iframe src="/insights_cytoscape/" id="insights-cytoscape"></iframe>
+    </div>
+</body>
+{% endblock %}

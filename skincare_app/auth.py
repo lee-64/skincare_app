@@ -137,3 +137,6 @@ def sign_in_required(view):
         return view(**kwargs)
 
     return wrapped_view
+
+
+# TODO: Make create account page look better (similar to sign in page)

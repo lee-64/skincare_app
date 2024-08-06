@@ -1,13 +1,9 @@
 {% extends "base_header.html" %}
 
-{% block header %}
-    <h1>{% block title %}Routine{% endblock %}</h1>
-{% endblock %}
-
 {% block content %}
 <body class="routine-home-page">
     <div class="routine-home-page-container">
-        <h1>Your Routine</h1>
+    <h1>{% block title %}Your Routine{% endblock %}</h1>
         <hr id="under-your-routine"/>
         {% if not session.user_id %}
             <div class="button-container">
@@ -32,7 +28,6 @@
                     <button type="submit" class="edit-routine-button">Edit</button>
                 </form>
             </div>
-        {{ session.routine }}
             {% for section in session.routine %}
                 <div class="routine-home-section-block">
                     <div class="routine-home-section-title">{{ section[0] }}</div>

@@ -12,8 +12,6 @@ bp = Blueprint('routine', __name__)
 
 @bp.route('/')
 def routine_home():
-    print(session.get('routine'))
-    print(type(session.get('routine')))
     return render_template('routine/routine_home.html')
 
 
@@ -89,7 +87,5 @@ def submit_routine_button():
     # insert routine into users db
     set_routine(session.get('username'), routine)
     session['routine'] = routine
-    # print(g.user['routine'])
-    # print(routine)
 
     return jsonify({'status': 'success', 'redirect_url': url_for('routine.routine_home')})
